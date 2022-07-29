@@ -2,5 +2,9 @@ query FindAllItems {
   items {
     id
     name
+    startDate
+    endDate
+    basePrice
+    status
   }
 }

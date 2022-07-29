@@ -313,7 +313,7 @@ export type UserWhereUniqueInput = {
 export type FindAllItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FindAllItemsQuery = { __typename?: 'Query', items: Array<{ __typename?: 'Item', id: string, name: string }> };
+export type FindAllItemsQuery = { __typename?: 'Query', items: Array<{ __typename?: 'Item', id: string, name: string, startDate?: any | null, endDate?: any | null, basePrice?: string | null, status: Status }> };
 
 
 export const FindAllItemsDocument = gql`
@@ -321,6 +321,10 @@ export const FindAllItemsDocument = gql`
   items {
     id
     name
+    startDate
+    endDate
+    basePrice
+    status
   }
 }
     `;

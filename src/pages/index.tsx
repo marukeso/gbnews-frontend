@@ -6,6 +6,7 @@ import {
   FindAllItemsQuery,
   FindAllItemsDocument,
 } from '../graphql/generated/graphql'
+import { format } from 'date-fns'
 
 const Home: NextPage = () => {
   const [result] = useQuery<FindAllItemsQuery>({
@@ -30,7 +31,17 @@ const Home: NextPage = () => {
       <Suspense fallback={<p>Loading...</p>}>
         <ul>
           {data?.items.map((item) => (
-            <li key={item.id}>{item.name}</li>
+            <li key={item.id}>
+              <p>{item.name}</p>
+              <p>
+                {format(new Date(item.startDate), 'yyyy年MM月dd日')}〜
+                {format(new Date(item.endDate), 'yyyy年MM月dd日')}
+              </p>
+              <p>
+                ${item.basePrice}
+                <span>(USD)</span>
+              </p>
+            </li>
           ))}
         </ul>
       </Suspense>
