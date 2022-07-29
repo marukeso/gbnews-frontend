@@ -1,25 +1,21 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { Suspense } from 'react'
 import { useQuery } from 'urql'
-
-const itemsQuery = `
-  query {
-    items {
-      id
-      name
-    }
-  }
-`
+import {
+  FindAllItemsQuery,
+  FindAllItemsDocument,
+} from '../graphql/generated/graphql'
 
 const Home: NextPage = () => {
-  const [result] = useQuery({
-    query: itemsQuery,
+  const [result] = useQuery<FindAllItemsQuery>({
+    query: FindAllItemsDocument,
   })
 
-  const { data, fetching, error } = result
+  const { data } = result
 
-  if (fetching) return <p>Loading...</p>
-  if (error) return <p>Oh no... {error.message}</p>
+  // if (fetching) return <p>Loading...</p>
+  // if (error) return <p>Oh no... {error?.message}</p>
 
   return (
     <div>
@@ -31,11 +27,13 @@ const Home: NextPage = () => {
 
       <h1>GB News front</h1>
 
-      <ul>
-        {data.items.map((item: any) => (
-          <li key={item.id}>{item.name}</li>
-        ))}
-      </ul>
+      <Suspense fallback={<p>Loading...</p>}>
+        <ul>
+          {data?.items.map((item) => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </ul>
+      </Suspense>
     </div>
   )
 }
