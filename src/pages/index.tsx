@@ -26,7 +26,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>GB News front</h1>
+      <h1 className="text-center">GB News</h1>
 
       <Suspense fallback={<p>Loading...</p>}>
         <ul>

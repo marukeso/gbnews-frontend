@@ -7,6 +7,7 @@ import {
   fetchExchange,
   Provider,
 } from 'urql'
+import { MantineProvider } from '@mantine/core'
 
 const client = createClient({
   url: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT!,
@@ -17,7 +18,15 @@ const client = createClient({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider value={client}>
-      <Component {...pageProps} />
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          colorScheme: 'light',
+        }}
+      >
+        <Component {...pageProps} />
+      </MantineProvider>
     </Provider>
   )
 }
