@@ -13,6 +13,11 @@
   font-family: 'Roboto', sans-serif;
 }
 
+html,
+body {
+  background-color: black;
+}
+
 a {
   text-decoration: none;
   color: inherit;
