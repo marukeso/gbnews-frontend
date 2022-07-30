@@ -17,7 +17,7 @@ export const Layout: FC<Props> = ({ children, title = 'Group Buy News' }) => {
       </Head>
 
       <div className="mx-auto flex min-h-screen flex-col">
-        <header className="sticky top-0 z-10 mb-6 flex items-center border-b border-gray-700 bg-black px-4 pt-3 pb-2">
+        <header className="sticky top-0 z-10 mb-6 flex items-center border-b border-gray-700 bg-black p-3 pb-2">
           <Link href="/">
             <a className="logo mr-4 text-4xl font-bold">GB</a>
           </Link>

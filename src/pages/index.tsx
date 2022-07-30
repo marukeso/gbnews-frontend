@@ -18,7 +18,7 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <Suspense fallback={<p>Loading...</p>}>
-        <SwipeList title="もうすぐ終わる" viewAll="/" data={data} />
+        <SwipeList title="End soon" viewAll="/" data={data} />
         <SwipeList title="Keyboards" viewAll="/" data={data} />
         <SwipeList title="Keycaps" viewAll="/" data={data} />
         <SwipeList title="Switches" viewAll="/" data={data} />
