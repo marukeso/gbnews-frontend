@@ -18,10 +18,18 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <Suspense fallback={<p>Loading...</p>}>
-        <SwipeList title="End soon" viewAll="/" data={data} />
-        <SwipeList title="Keyboards" viewAll="/" data={data} />
-        <SwipeList title="Keycaps" viewAll="/" data={data} />
-        <SwipeList title="Switches" viewAll="/" data={data} />
+        <div className="mb-6">
+          <SwipeList title="End soon" viewAll="/" data={data} />
+        </div>
+        <div className="mb-6">
+          <SwipeList title="Keyboards" viewAll="/" data={data} />
+        </div>
+        <div className="mb-6">
+          <SwipeList title="Keycaps" viewAll="/" data={data} />
+        </div>
+        <div className="mb-6">
+          <SwipeList title="Switches" viewAll="/" data={data} />
+        </div>
       </Suspense>
     </Layout>
   )
