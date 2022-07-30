@@ -43,7 +43,7 @@ export const SwipeList: FC<Props> = ({ title, viewAll, data }) => {
 
               <div className="w-[calc(100%_-_80px)]">
                 <p className="truncate">{item.name}</p>
-                <p className="text-sm font-light">
+                <p className="text-sm font-light text-gray-300">
                   {`${formatDistanceToNow(new Date(item.endDate))} left`}
                 </p>
               </div>
