@@ -50,6 +50,7 @@ export type Item = {
   basePrice?: Maybe<Scalars['String']>;
   endDate?: Maybe<Scalars['DateTime']>;
   id: Scalars['ID'];
+  imageUrl: Scalars['String'];
   name: Scalars['String'];
   startDate?: Maybe<Scalars['DateTime']>;
   status: Status;
@@ -59,6 +60,7 @@ export type ItemCreateInput = {
   basePrice?: InputMaybe<Scalars['String']>;
   endDate?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
+  imageUrl: Scalars['String'];
   name: Scalars['String'];
   startDate?: InputMaybe<Scalars['DateTime']>;
   status?: InputMaybe<Status>;
@@ -68,6 +70,7 @@ export type ItemOrderByWithRelationInput = {
   basePrice?: InputMaybe<SortOrder>;
   endDate?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  imageUrl?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
   startDate?: InputMaybe<SortOrder>;
   status?: InputMaybe<SortOrder>;
@@ -78,6 +81,7 @@ export enum ItemScalarFieldEnum {
   CreatedAt = 'createdAt',
   EndDate = 'endDate',
   Id = 'id',
+  ImageUrl = 'imageUrl',
   Name = 'name',
   StartDate = 'startDate',
   Status = 'status',
@@ -91,6 +95,7 @@ export type ItemWhereInput = {
   basePrice?: InputMaybe<StringNullableFilter>;
   endDate?: InputMaybe<DateTimeNullableFilter>;
   id?: InputMaybe<StringFilter>;
+  imageUrl?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
   startDate?: InputMaybe<DateTimeNullableFilter>;
   status?: InputMaybe<EnumStatusFilter>;
@@ -313,7 +318,7 @@ export type UserWhereUniqueInput = {
 export type FindAllItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FindAllItemsQuery = { __typename?: 'Query', items: Array<{ __typename?: 'Item', id: string, name: string, startDate?: any | null, endDate?: any | null, basePrice?: string | null, status: Status }> };
+export type FindAllItemsQuery = { __typename?: 'Query', items: Array<{ __typename?: 'Item', id: string, name: string, imageUrl: string, startDate?: any | null, endDate?: any | null, basePrice?: string | null, status: Status }> };
 
 
 export const FindAllItemsDocument = gql`
@@ -321,6 +326,7 @@ export const FindAllItemsDocument = gql`
   items {
     id
     name
+    imageUrl
     startDate
     endDate
     basePrice
@@ -365,6 +371,17 @@ export default {
           },
           {
             "name": "id",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "imageUrl",
             "type": {
               "kind": "NON_NULL",
               "ofType": {

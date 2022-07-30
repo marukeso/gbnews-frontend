@@ -2,6 +2,7 @@ query FindAllItems {
   items {
     id
     name
+    imageUrl
     startDate
     endDate
     basePrice

@@ -21,30 +21,32 @@ const Home: NextPage = () => {
       <Suspense fallback={<p>Loading...</p>}>
         <div>
           {data?.items.map((item) => (
-            <Link href={`${item.id}`} key={item.id}>
-              <a className="mb-5 flex">
-                <div className="relative w-[80px]">
-                  <Image
-                    className="aspect-square rounded-lg"
-                    width={80}
-                    height={80}
-                    src="/test-image.png"
-                    alt="image"
-                  />
-                </div>
+            <div key={item.id} className="mb-5">
+              <Link href={`${item.id}`}>
+                <a>
+                  <div className="relative w-[80px]">
+                    <Image
+                      className="aspect-square rounded-lg object-cover"
+                      width={80}
+                      height={80}
+                      src={`/${item.imageUrl}`}
+                      alt="image"
+                    />
+                  </div>
 
-                <div className="w-[calc(100%_-_80px)] pl-4">
-                  <p className="inline-block rounded-full bg-red-500 px-2 text-xs font-bold text-white">
-                    {item.status}
-                  </p>
-                  <h1 className="truncate text-lg font-bold">{item.name}</h1>
-                  <p className="text-sm text-gray-600">
-                    {format(new Date(item.startDate), 'yyyy年MM月dd日')}〜
-                    {format(new Date(item.endDate), 'yyyy年MM月dd日')}
-                  </p>
-                </div>
-              </a>
-            </Link>
+                  <div className="w-[calc(100%_-_80px)] pl-4">
+                    <p className="inline-block rounded-full bg-red-500 px-2 text-xs font-bold text-white">
+                      {item.status}
+                    </p>
+                    <h1 className="truncate text-lg font-bold">{item.name}</h1>
+                    <p className="text-sm text-gray-600">
+                      {format(new Date(item.startDate), 'yyyy年MM月dd日')}〜
+                      {format(new Date(item.endDate), 'yyyy年MM月dd日')}
+                    </p>
+                  </div>
+                </a>
+              </Link>
+            </div>
           ))}
         </div>
       </Suspense>
