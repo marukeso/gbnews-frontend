@@ -22,29 +22,33 @@ const ItemDetail: NextPage = () => {
   const { data } = result
   // console.log(data?.findById)
 
+  if (!data?.findById) {
+    return <p>Oops...</p>
+  }
+
   return (
-    <Layout title={data?.findById.name}>
+    <Layout title={data.findById.name}>
       <Suspense fallback={<p>Loading...</p>}>
         <div>
           <Link href="/">
             <a className="mx-3 mb-5 inline-block">Back</a>
           </Link>
 
-          <h1 className="mb-6 px-3 text-2xl">{data?.findById.name}</h1>
+          <h1 className="mb-6 px-3 text-2xl">{data.findById.name}</h1>
           <Image
             width={80}
             height={50}
             layout="responsive"
             objectFit="cover"
-            src={`/${data?.findById.imageUrl}`}
-            alt={data?.findById.name}
+            src={`/${data.findById.imageUrl}`}
+            alt={data.findById.name}
           />
           <div className="mt-6 px-3">
-            <p>{data?.findById.status}</p>
-            {/* <p>
-              {format(new Date(data?.findById.startDate), 'yyyy/MM/dd')}〜
-              {format(new Date(data?.findById.endDate), 'yyyy/MM/dd')}
-            </p> */}
+            <p>{data.findById.status}</p>
+            <p>
+              {format(new Date(data.findById.startDate), 'yyyy/MM/dd')}〜
+              {format(new Date(data.findById.endDate), 'yyyy/MM/dd')}
+            </p>
             <p>Vendors:</p>
           </div>
         </div>
