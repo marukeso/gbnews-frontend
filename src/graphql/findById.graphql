@@ -1,0 +1,11 @@
+query findById($id: String!) {
+  findById(id: $id) {
+    id
+    name
+    imageUrl
+    startDate
+    endDate
+    basePrice
+    status
+  }
+}

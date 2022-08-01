@@ -198,9 +198,15 @@ export type NestedStringNullableFilter = {
 
 export type Query = {
   __typename?: 'Query';
+  findById: Item;
   item: Item;
   items: Array<Item>;
   user: User;
+};
+
+
+export type QueryFindByIdArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -320,6 +326,13 @@ export type FindAllItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type FindAllItemsQuery = { __typename?: 'Query', items: Array<{ __typename?: 'Item', id: string, name: string, imageUrl: string, startDate?: any | null, endDate?: any | null, basePrice?: string | null, status: Status }> };
 
+export type FindByIdQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type FindByIdQuery = { __typename?: 'Query', findById: { __typename?: 'Item', id: string, name: string, imageUrl: string, startDate?: any | null, endDate?: any | null, basePrice?: string | null, status: Status } };
+
 
 export const FindAllItemsDocument = gql`
     query FindAllItems {
@@ -337,6 +350,23 @@ export const FindAllItemsDocument = gql`
 
 export function useFindAllItemsQuery(options?: Omit<Urql.UseQueryArgs<FindAllItemsQueryVariables>, 'query'>) {
   return Urql.useQuery<FindAllItemsQuery, FindAllItemsQueryVariables>({ query: FindAllItemsDocument, ...options });
+};
+export const FindByIdDocument = gql`
+    query findById($id: String!) {
+  findById(id: $id) {
+    id
+    name
+    imageUrl
+    startDate
+    endDate
+    basePrice
+    status
+  }
+}
+    `;
+
+export function useFindByIdQuery(options: Omit<Urql.UseQueryArgs<FindByIdQueryVariables>, 'query'>) {
+  return Urql.useQuery<FindByIdQuery, FindByIdQueryVariables>({ query: FindByIdDocument, ...options });
 };
 import { IntrospectionQuery } from 'graphql';
 export default {
@@ -534,6 +564,29 @@ export default {
         "kind": "OBJECT",
         "name": "Query",
         "fields": [
+          {
+            "name": "findById",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Item",
+                "ofType": null
+              }
+            },
+            "args": [
+              {
+                "name": "id",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          },
           {
             "name": "item",
             "type": {

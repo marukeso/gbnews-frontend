@@ -25,30 +25,30 @@ export const SwipeList: FC<Props> = ({ title, viewAll, data }) => {
         <div className="flex w-max space-x-3 px-3">
           {data?.items.map((item) => (
             <div key={item.id} className="mb-5">
-              {/* <Link href={`${item.id}`}> */}
-              {/* <a> */}
-              <div className="relative mb-2 w-[80vw]">
-                <Image
-                  className="object-cover"
-                  width={80}
-                  height={50}
-                  src={`/${item.imageUrl}`}
-                  alt="image"
-                  layout="responsive"
-                />
-                <p className=" absolute top-2 left-2 inline-block rounded-full bg-red-500 px-2 text-xs font-bold text-white">
-                  {item.status}
-                </p>
-              </div>
+              <Link href={`/item/${item.id}`}>
+                <a>
+                  <div className="relative mb-2 w-[80vw]">
+                    <Image
+                      width={80}
+                      height={50}
+                      src={`/${item.imageUrl}`}
+                      alt="image"
+                      objectFit="cover"
+                      layout="responsive"
+                    />
+                    <p className="absolute top-2 left-2 inline-block rounded-full bg-red-500 px-2 text-xs font-bold text-white">
+                      {item.status}
+                    </p>
+                  </div>
 
-              <div className="w-[calc(100%_-_80px)]">
-                <p className="truncate">{item.name}</p>
-                <p className="text-sm font-light text-gray-300">
-                  {`${formatDistanceToNow(new Date(item.endDate))} left`}
-                </p>
-              </div>
-              {/* </a> */}
-              {/* </Link> */}
+                  <div className="w-[calc(100%_-_80px)]">
+                    <p className="truncate">{item.name}</p>
+                    <p className="text-sm font-light text-gray-300">
+                      {`${formatDistanceToNow(new Date(item.endDate))} left`}
+                    </p>
+                  </div>
+                </a>
+              </Link>
             </div>
           ))}
         </div>

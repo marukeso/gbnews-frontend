@@ -19,18 +19,18 @@ export const Layout: FC<Props> = ({ children, title = 'Group Buy News' }) => {
       <div className="mx-auto flex min-h-screen flex-col">
         <header className="sticky top-0 z-10 mb-6 flex items-center border-b border-gray-700 bg-[#1A1B1E] p-3 pb-2">
           <Link href="/">
-            <a className="logo mr-4 text-4xl font-bold">GB</a>
+            <a className="logo mr-4 text-4xl font-bold tracking-tight">GBN</a>
           </Link>
 
           <nav className="mb-1 flex justify-end space-x-4">
             <Link href="/">
-              <a className="font-bold">Keyboards</a>
+              <a>Keyboards</a>
             </Link>
             <Link href="/">
-              <a className="font-bold">Keycaps</a>
+              <a>Keycaps</a>
             </Link>
             <Link href="/">
-              <a className="font-bold">Switches</a>
+              <a>Switches</a>
             </Link>
           </nav>
         </header>
@@ -39,7 +39,7 @@ export const Layout: FC<Props> = ({ children, title = 'Group Buy News' }) => {
 
         <footer className="mt-auto">
           <p className="pt-14 pb-6 text-center text-sm">
-            ©{new Date().getFullYear()} {title}
+            ©{new Date().getFullYear()} Group Buy News
           </p>
         </footer>
       </div>
