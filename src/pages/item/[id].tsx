@@ -41,10 +41,10 @@ const ItemDetail: NextPage = () => {
           />
           <div className="mt-6 px-3">
             <p>{data?.findById.status}</p>
-            <p>
+            {/* <p>
               {format(new Date(data?.findById.startDate), 'yyyy/MM/dd')}〜
               {format(new Date(data?.findById.endDate), 'yyyy/MM/dd')}
-            </p>
+            </p> */}
             <p>Vendors:</p>
           </div>
         </div>
