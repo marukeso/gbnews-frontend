@@ -23,6 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         withNormalizeCSS
         theme={{
           colorScheme: 'dark',
+          loader: 'dots',
         }}
       >
         <Component {...pageProps} />

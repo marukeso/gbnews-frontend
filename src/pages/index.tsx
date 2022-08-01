@@ -8,6 +8,7 @@ import {
 import { Layout } from '../components/Layout'
 
 import { SwipeList } from '../components/SwipeList'
+import { Loading } from '../components/Loading'
 
 const Home: NextPage = () => {
   const [result] = useQuery<FindAllItemsQuery>({
@@ -16,8 +17,8 @@ const Home: NextPage = () => {
   const { data } = result
 
   return (
-    <Layout>
-      <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<Loading />}>
+      <Layout>
         <div className="mb-6">
           <SwipeList title="Ends soon" viewAll="/" data={data} />
         </div>
@@ -30,8 +31,8 @@ const Home: NextPage = () => {
         <div className="mb-6">
           <SwipeList title="Switches" viewAll="/" data={data} />
         </div>
-      </Suspense>
-    </Layout>
+      </Layout>
+    </Suspense>
   )
 }
 
