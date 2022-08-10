@@ -30,21 +30,21 @@ const Home: NextPage = () => {
         <div className="mb-6">
           <SwipeList
             title="Keycaps"
-            viewAll="/"
+            viewAll="/keycaps"
             data={keycapResult.data?.itemsByCategory}
           />
         </div>
         <div className="mb-6">
           <SwipeList
             title="Keyboards"
-            viewAll="/"
+            viewAll="/keyboards"
             data={keyboardResult.data?.itemsByCategory}
           />
         </div>
         <div className="mb-6">
           <SwipeList
             title="Switches"
-            viewAll="/"
+            viewAll="/switches"
             data={switchResult.data?.itemsByCategory}
           />
         </div>

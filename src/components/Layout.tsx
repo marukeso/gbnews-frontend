@@ -23,13 +23,13 @@ export const Layout: FC<Props> = ({ children, title = 'Group Buy News' }) => {
           </Link>
 
           <nav className="mb-1 flex justify-end space-x-4">
-            <Link href="/">
-              <a>Keyboards</a>
-            </Link>
-            <Link href="/">
+            <Link href="/keycaps">
               <a>Keycaps</a>
             </Link>
-            <Link href="/">
+            <Link href="/keyboards">
+              <a>Keyboards</a>
+            </Link>
+            <Link href="/switches">
               <a>Switches</a>
             </Link>
           </nav>
