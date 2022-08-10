@@ -2,13 +2,13 @@ import { format } from 'date-fns'
 import Image from 'next/image'
 import Link from 'next/link'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
-import type { FindAllItemsQuery } from '../graphql/generated/graphql'
+import type { Item } from '../graphql/generated/graphql'
 import { FC } from 'react'
 
 type Props = {
   title: string
   viewAll: string
-  data?: FindAllItemsQuery
+  data?: Item[]
 }
 
 export const SwipeList: FC<Props> = ({ title, viewAll, data }) => {
@@ -23,7 +23,7 @@ export const SwipeList: FC<Props> = ({ title, viewAll, data }) => {
       </div>
       <div className="overflow-scroll">
         <div className="flex w-max space-x-3 px-3">
-          {data?.items.map((item) => (
+          {data?.map((item) => (
             <div key={item.id} className="mb-5">
               <Link href={`/item/${item.id}`}>
                 <a>

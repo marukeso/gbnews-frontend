@@ -16,6 +16,12 @@ export type Scalars = {
   DateTime: any;
 };
 
+export enum Category {
+  Keyboards = 'KEYBOARDS',
+  Keycaps = 'KEYCAPS',
+  Switches = 'SWITCHES'
+}
+
 export type DateTimeNullableFilter = {
   equals?: InputMaybe<Scalars['DateTime']>;
   gt?: InputMaybe<Scalars['DateTime']>;
@@ -25,6 +31,13 @@ export type DateTimeNullableFilter = {
   lte?: InputMaybe<Scalars['DateTime']>;
   not?: InputMaybe<NestedDateTimeNullableFilter>;
   notIn?: InputMaybe<Array<Scalars['DateTime']>>;
+};
+
+export type EnumCategoryFilter = {
+  equals?: InputMaybe<Category>;
+  in?: InputMaybe<Array<Category>>;
+  not?: InputMaybe<NestedEnumCategoryFilter>;
+  notIn?: InputMaybe<Array<Category>>;
 };
 
 export type EnumStatusFilter = {
@@ -48,6 +61,7 @@ export type IntFilter = {
 export type Item = {
   __typename?: 'Item';
   basePrice?: Maybe<Scalars['String']>;
+  category: Category;
   endDate?: Maybe<Scalars['DateTime']>;
   id: Scalars['ID'];
   imageUrl: Scalars['String'];
@@ -58,6 +72,7 @@ export type Item = {
 
 export type ItemCreateInput = {
   basePrice?: InputMaybe<Scalars['String']>;
+  category: Category;
   endDate?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   imageUrl: Scalars['String'];
@@ -68,6 +83,7 @@ export type ItemCreateInput = {
 
 export type ItemOrderByWithRelationInput = {
   basePrice?: InputMaybe<SortOrder>;
+  category?: InputMaybe<SortOrder>;
   endDate?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   imageUrl?: InputMaybe<SortOrder>;
@@ -78,6 +94,7 @@ export type ItemOrderByWithRelationInput = {
 
 export enum ItemScalarFieldEnum {
   BasePrice = 'basePrice',
+  Category = 'category',
   CreatedAt = 'createdAt',
   EndDate = 'endDate',
   Id = 'id',
@@ -93,6 +110,7 @@ export type ItemWhereInput = {
   NOT?: InputMaybe<Array<ItemWhereInput>>;
   OR?: InputMaybe<Array<ItemWhereInput>>;
   basePrice?: InputMaybe<StringNullableFilter>;
+  category?: InputMaybe<EnumCategoryFilter>;
   endDate?: InputMaybe<DateTimeNullableFilter>;
   id?: InputMaybe<StringFilter>;
   imageUrl?: InputMaybe<StringFilter>;
@@ -150,6 +168,13 @@ export type NestedDateTimeNullableFilter = {
   notIn?: InputMaybe<Array<Scalars['DateTime']>>;
 };
 
+export type NestedEnumCategoryFilter = {
+  equals?: InputMaybe<Category>;
+  in?: InputMaybe<Array<Category>>;
+  not?: InputMaybe<NestedEnumCategoryFilter>;
+  notIn?: InputMaybe<Array<Category>>;
+};
+
 export type NestedEnumStatusFilter = {
   equals?: InputMaybe<Status>;
   in?: InputMaybe<Array<Status>>;
@@ -201,6 +226,7 @@ export type Query = {
   findById: Item;
   item: Item;
   items: Array<Item>;
+  itemsByCategory: Array<Item>;
   user: User;
 };
 
@@ -211,6 +237,16 @@ export type QueryFindByIdArgs = {
 
 
 export type QueryItemArgs = {
+  cursor?: InputMaybe<ItemWhereUniqueInput>;
+  distinct?: InputMaybe<Array<ItemScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<ItemOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ItemWhereInput>;
+};
+
+
+export type QueryItemsByCategoryArgs = {
   cursor?: InputMaybe<ItemWhereUniqueInput>;
   distinct?: InputMaybe<Array<ItemScalarFieldEnum>>;
   orderBy?: InputMaybe<Array<ItemOrderByWithRelationInput>>;
@@ -324,7 +360,7 @@ export type UserWhereUniqueInput = {
 export type FindAllItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FindAllItemsQuery = { __typename?: 'Query', items: Array<{ __typename?: 'Item', id: string, name: string, imageUrl: string, startDate?: any | null, endDate?: any | null, basePrice?: string | null, status: Status }> };
+export type FindAllItemsQuery = { __typename?: 'Query', items: Array<{ __typename?: 'Item', id: string, name: string, imageUrl: string, startDate?: any | null, endDate?: any | null, basePrice?: string | null, status: Status, category: Category }> };
 
 export type FindByIdQueryVariables = Exact<{
   id: Scalars['String'];
@@ -332,6 +368,13 @@ export type FindByIdQueryVariables = Exact<{
 
 
 export type FindByIdQuery = { __typename?: 'Query', findById: { __typename?: 'Item', id: string, name: string, imageUrl: string, startDate?: any | null, endDate?: any | null, basePrice?: string | null, status: Status } };
+
+export type ItemsByCategoryQueryVariables = Exact<{
+  category: Category;
+}>;
+
+
+export type ItemsByCategoryQuery = { __typename?: 'Query', itemsByCategory: Array<{ __typename?: 'Item', id: string, name: string, imageUrl: string, startDate?: any | null, endDate?: any | null, basePrice?: string | null, status: Status, category: Category }> };
 
 
 export const FindAllItemsDocument = gql`
@@ -344,6 +387,7 @@ export const FindAllItemsDocument = gql`
     endDate
     basePrice
     status
+    category
   }
 }
     `;
@@ -368,6 +412,24 @@ export const FindByIdDocument = gql`
 export function useFindByIdQuery(options: Omit<Urql.UseQueryArgs<FindByIdQueryVariables>, 'query'>) {
   return Urql.useQuery<FindByIdQuery, FindByIdQueryVariables>({ query: FindByIdDocument, ...options });
 };
+export const ItemsByCategoryDocument = gql`
+    query itemsByCategory($category: Category!) {
+  itemsByCategory(where: {category: {equals: $category}}) {
+    id
+    name
+    imageUrl
+    startDate
+    endDate
+    basePrice
+    status
+    category
+  }
+}
+    `;
+
+export function useItemsByCategoryQuery(options: Omit<Urql.UseQueryArgs<ItemsByCategoryQueryVariables>, 'query'>) {
+  return Urql.useQuery<ItemsByCategoryQuery, ItemsByCategoryQueryVariables>({ query: ItemsByCategoryDocument, ...options });
+};
 import { IntrospectionQuery } from 'graphql';
 export default {
   "__schema": {
@@ -388,6 +450,17 @@ export default {
             "type": {
               "kind": "SCALAR",
               "name": "Any"
+            },
+            "args": []
+          },
+          {
+            "name": "category",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
             },
             "args": []
           },
@@ -671,6 +744,79 @@ export default {
               }
             },
             "args": []
+          },
+          {
+            "name": "itemsByCategory",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "LIST",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Item",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "args": [
+              {
+                "name": "cursor",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "distinct",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Any"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "orderBy",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Any"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "skip",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "take",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "where",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              }
+            ]
           },
           {
             "name": "user",

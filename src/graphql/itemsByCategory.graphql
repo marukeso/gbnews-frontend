@@ -1,0 +1,18 @@
+enum Category {
+  KEYCAPS
+  KEYBOARDS
+  SWITCHES
+}
+
+query itemsByCategory($category: Category!) {
+  itemsByCategory(where: { category: { equals: $category } }) {
+    id
+    name
+    imageUrl
+    startDate
+    endDate
+    basePrice
+    status
+    category
+  }
+}
