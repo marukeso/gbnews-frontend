@@ -28,9 +28,9 @@ const ItemDetail: NextPage = () => {
   return (
     <Layout title={data.findById.name}>
       <div>
-        <Link href="/">
-          <a className="mx-3 mb-5 inline-block">Back</a>
-        </Link>
+        <a className="mx-3 mb-5 inline-block" onClick={() => router.back()}>
+          Back
+        </a>
 
         <h1 className="mb-6 px-3 text-2xl">{data.findById.name}</h1>
         <Image
